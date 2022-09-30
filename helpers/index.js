@@ -1,5 +1,9 @@
-module.exports = ["./apiHelpers.js", "./errors.js"].reduce((obj, file) => {
-  const exp = require(file);
-  Object.assign(obj, exp);
-  return obj;
-}, {});
+const hlps = require("./apiHelpers");
+const RequestError = require("./errors");
+const sendMail = require("./sendMail");
+
+module.exports = {
+  hlps,
+  RequestError,
+  sendMail,
+};
