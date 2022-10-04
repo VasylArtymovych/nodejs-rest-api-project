@@ -22,9 +22,8 @@ const register = async ({ password, email, subscription }) => {
     to: email,
     subject: "Confirm registration!",
     text: `Please confirm your email adress POST http://localhost:3030/api/users/verify/${verificationToken}`,
-    html: `<a target="_blank" href="http://localhost:3030/api/users/verify/${verificationToken}"></a`,
+    html: `<a target="_blank" href="http://localhost:3030/api/users/verify/${verificationToken}">confirm your verification</a`,
   });
-  console.log("email sent");
 
   return newUser;
 };

@@ -7,7 +7,7 @@ const sendMail = async (data) => {
     from: "yerimjunior@meta.ua",
     ...data,
   };
-  console.log(msg);
+
   try {
     await sgMail.send(msg);
     return true;
@@ -16,4 +16,4 @@ const sendMail = async (data) => {
   }
 };
 
-module.exports = sendMail;
+module.exports = sendMail ;
