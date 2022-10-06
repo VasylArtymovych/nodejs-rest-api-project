@@ -23,5 +23,6 @@ router.patch(
 );
 
 router.get("/verify/:verificationToken", hlps.ctrlWrapper(ctrl.verify));
+router.post("/verify", validation(userJoiSchema.verifySchema), hlps.ctrlWrapper(ctrl.reVerify))
 
 module.exports = router;
