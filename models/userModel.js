@@ -26,15 +26,22 @@ const userShema = mongoose.Schema(
         return gravatar.url(this.email, { s: 250 }, true);
       },
     },
+    verify: {
+      type: Boolean,
+      default: false,
+    },
+    verificationToken: {
+      type: String,
+      required: [true, "Verify token is required"],
+    },
   },
   { versionKey: false, timestamps: true }
 );
 
 userShema.pre("save", async function (next) {
-  if (this.isNew) {
+  if (this.isNew || this.isModified) {
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
-  // check if is not new
 });
 
 const User = mongoose.model("User", userShema);

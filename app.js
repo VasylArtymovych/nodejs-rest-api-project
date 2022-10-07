@@ -2,8 +2,8 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
-const { unknownRouteHandler, errorHandler } = require("./helpers");
-const { contactsRouter, userRouter } = require("./routes");
+const { hlps } = require("./helpers");
+const { contactsRouter, userRouter, authRouter } = require("./routes");
 
 const app = express();
 
@@ -15,9 +15,10 @@ app.use(express.json());
 app.use(express.static("public"));
 
 app.use("/api/contacts", contactsRouter);
+app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 
-app.use(unknownRouteHandler);
-app.use(errorHandler);
+app.use(hlps.unknownRouteHandler);
+app.use(hlps.errorHandler);
 
 module.exports = app;

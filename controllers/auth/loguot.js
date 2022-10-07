@@ -1,8 +1,8 @@
-const { users: operations } = require("../../services");
+const { auth } = require("../../services");
 
 const logout = async (req, res) => {
   const user = req.user;
-  await operations.logout(user._id);
+  await auth.logout(user._id);
 
   res.status(204).json({});
 };

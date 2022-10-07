@@ -1,15 +1,13 @@
-const register = require("./register");
-const login = require("./login");
 const authUser = require("./authUser");
-const logout = require("./logout");
 const updateSubscription = require("./updateSubscription");
 const updateAvatar = require("./apdateAvatar");
+const verify = require("./verify");
+const reVerify = require("./reVerify");
 
 module.exports = {
-  register,
-  login,
   authUser,
-  logout,
   updateSubscription,
   updateAvatar,
+  verify,
+  reVerify
 };

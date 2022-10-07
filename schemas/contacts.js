@@ -5,8 +5,7 @@ const contact = Joi.object({
   email: Joi.string().email(),
   phone: Joi.string()
     .pattern(/^[0-9-]+$/)
-    .min(7)
-    .required(),
+    .min(7),
   favorite: Joi.boolean(),
 });
 

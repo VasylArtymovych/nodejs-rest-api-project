@@ -1,5 +1,5 @@
 const express = require("express");
-const { ctrlWrapper } = require("../../helpers");
+const { hlps } = require("../../helpers");
 const { contacts: ctrl } = require("../../controllers");
 const { validation, auth } = require("../../middlewares");
 const { contactJoiSchema } = require("../../schemas");
@@ -8,24 +8,28 @@ const router = express.Router();
 
 router.use(auth);
 
-router.get("/", ctrlWrapper(ctrl.getAll));
+router.get("/", hlps.ctrlWrapper(ctrl.getAll));
 
-router.get("/:contactId", ctrlWrapper(ctrl.getById));
+router.get("/:contactId", hlps.ctrlWrapper(ctrl.getById));
 
-router.post("/", validation(contactJoiSchema.contact), ctrlWrapper(ctrl.add));
+router.post(
+  "/",
+  validation(contactJoiSchema.contact),
+  hlps.ctrlWrapper(ctrl.add)
+);
 
-router.delete("/:contactId", ctrlWrapper(ctrl.deleteById));
+router.delete("/:contactId", hlps.ctrlWrapper(ctrl.deleteById));
 
 router.put(
   "/:contactId",
   validation(contactJoiSchema.contact),
-  ctrlWrapper(ctrl.updateById)
+  hlps.ctrlWrapper(ctrl.updateById)
 );
 
 router.patch(
   "/:contactId/favorite",
   validation(contactJoiSchema.status),
-  ctrlWrapper(ctrl.updateStatusById)
+  hlps.ctrlWrapper(ctrl.updateStatusById)
 );
 
 module.exports = router;
