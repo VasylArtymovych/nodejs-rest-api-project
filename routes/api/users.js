@@ -6,6 +6,14 @@ const { userJoiSchema } = require("../../schemas");
 
 const router = express.Router();
 
+router.post(
+  "/verify",
+  validation(userJoiSchema.verifySchema),
+  hlps.ctrlWrapper(ctrl.reVerify)
+);
+
+router.get("/verify/:verificationToken", hlps.ctrlWrapper(ctrl.verify));
+
 router.get("/current", auth, hlps.ctrlWrapper(ctrl.getCurrent));
 
 router.patch(
@@ -21,8 +29,5 @@ router.patch(
   upload.single("avatar"),
   hlps.ctrlWrapper(ctrl.updateAvatar)
 );
-
-router.get("/verify/:verificationToken", hlps.ctrlWrapper(ctrl.verify));
-router.post("/verify", validation(userJoiSchema.verifySchema), hlps.ctrlWrapper(ctrl.reVerify))
 
 module.exports = router;
