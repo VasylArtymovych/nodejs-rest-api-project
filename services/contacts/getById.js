@@ -1,8 +1,12 @@
 const { Contact } = require("../../models");
 const { RequestError } = require("../../helpers");
 
-const getById = async (contactId, userId) => {
-  const contact = await Contact.findOne({ _id: contactId, owner: userId });
+const getById = async (contactId, owner) => {
+  const contact = await Contact.findOne({ _id: contactId, owner }).populate(
+    "owner",
+    "email subscription avatarURL"
+  );
+
   if (!contact) {
     throw RequestError(
       404,

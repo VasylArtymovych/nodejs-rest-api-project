@@ -16,7 +16,7 @@ const login = async (password, email) => {
     throw RequestError(401, "Email or password is wrong or not verified.");
   }
 
-  const token = await jwt.sign({ id: user._id, email }, secret, {
+  const token = await jwt.sign({ id: user._id }, secret, {
     expiresIn: "1d",
   });
 
@@ -24,7 +24,6 @@ const login = async (password, email) => {
 
   return {
     token,
-    user: { email: user.email, subscription: user.subscription },
   };
 };
 

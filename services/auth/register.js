@@ -2,6 +2,8 @@ const { v4: uuidv4 } = require("uuid");
 const { User } = require("../../models");
 const { RequestError, sendMail } = require("../../helpers");
 
+const { PORT } = process.env;
+
 const register = async ({ password, email, subscription }) => {
   const user = await User.findOne({ email });
 
@@ -10,22 +12,21 @@ const register = async ({ password, email, subscription }) => {
   }
 
   const verificationToken = uuidv4();
-  const newUser = new User({
+  const newUser = await User.create({
     password,
     email,
     subscription,
     verificationToken,
   });
-  await newUser.save();
 
   await sendMail({
     to: email,
-    subject: "Confirm registration!",
-    text: `Please confirm your email adress POST http://localhost:3030/api/users/verify/${verificationToken}`,
-    html: `<a target="_blank" href="http://localhost:3030/api/users/verify/${verificationToken}">confirm your verification</a`,
+    subject: "Confirm your registration!",
+    text: `Please confirm your email adress POST http://localhost:${PORT}/api/users/verify/${verificationToken}`,
+    html: `<a target="_blank" href="http://localhost:${PORT}/api/users/verify/${verificationToken}">confirm your verification</a`,
   });
 
-  return newUser;
+  return { email: newUser.email, subscription: newUser.subscription };
 };
 
 module.exports = register;

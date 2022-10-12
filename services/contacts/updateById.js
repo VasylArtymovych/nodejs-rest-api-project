@@ -1,17 +1,18 @@
 const { Contact } = require("../../models");
 const { RequestError } = require("../../helpers");
 
-const updateById = async (contactId, body, userId) => {
+const updateById = async (contactId, body, owner) => {
   const contact = await Contact.findOneAndUpdate(
     {
       _id: contactId,
-      owner: userId,
+      owner,
     },
     {
       $set: { ...body },
     },
-    { returnDocument: "after" }
+    { new: true }
   );
+
   if (!contact) {
     throw RequestError(
       404,

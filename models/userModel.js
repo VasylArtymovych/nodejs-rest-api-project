@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const gravatar = require("gravatar");
-const bcrypt = require("bcrypt");
-const saltRounds = 10;
+const { handleMongooseError, hashPassword } = require("../helpers");
 
 const userShema = mongoose.Schema(
   {
@@ -12,7 +11,7 @@ const userShema = mongoose.Schema(
     email: {
       type: String,
       required: [true, "Email is required"],
-      unique: true,
+      unique: [true, "Email in use"],
     },
     subscription: {
       type: String,
@@ -38,11 +37,9 @@ const userShema = mongoose.Schema(
   { versionKey: false, timestamps: true }
 );
 
-userShema.pre("save", async function (next) {
-  if (this.isNew || this.isModified) {
-    this.password = await bcrypt.hash(this.password, saltRounds);
-  }
-});
+userShema.post("save", handleMongooseError);
+
+userShema.pre("save", hashPassword);
 
 const User = mongoose.model("User", userShema);
 

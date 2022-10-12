@@ -1,9 +1,9 @@
 const { contacts: operations } = require("../../services");
 
 const add = async (req, res) => {
-  const { _id: userId } = req.user;
+  const { _id: owner } = req.user;
 
-  await operations.add(req.body, userId);
+  await operations.add(req.body, owner);
 
   res.status(200).json({ status: "success" });
 };

@@ -2,9 +2,9 @@ const { auth } = require("../../services");
 
 const login = async (req, res) => {
   const { email, password } = req.body;
-  const { token, user } = await auth.login(password, email);
+  const { token } = await auth.login(password, email);
 
-  res.status(200).json({ user, token });
+  res.status(200).json({ token });
 };
 
 module.exports = login;

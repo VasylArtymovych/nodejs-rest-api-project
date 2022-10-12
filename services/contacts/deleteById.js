@@ -1,11 +1,15 @@
 const { Contact } = require("../../models");
 const { RequestError } = require("../../helpers");
 
-const deleteById = async (contactId, userId) => {
-  const contact = await Contact.findOneAndDelete({
-    _id: contactId,
-    owner: userId,
-  });
+const deleteById = async (contactId, owner) => {
+  const contact = await Contact.findOneAndDelete(
+    {
+      _id: contactId,
+      owner,
+    },
+    { projection: ["name email"] }
+  );
+
   if (!contact) {
     throw RequestError(
       404,
