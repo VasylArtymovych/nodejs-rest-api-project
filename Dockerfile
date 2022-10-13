@@ -10,4 +10,4 @@ COPY . .
 
 CMD [ "node", "server" ]
 
-EXPOSE 3030
+EXPOSE 7070

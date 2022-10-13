@@ -31,3 +31,7 @@ router.patch(
 );
 
 module.exports = router;
+
+// upload.single("avatar"), // single field with one file
+// upload.array("avatar", 5),  // when is one field with few files
+// upload.fields([{name: "avatar", maxCount: 1}, {name: "otherName", maxCount: 2}]),  // when is few fields with files

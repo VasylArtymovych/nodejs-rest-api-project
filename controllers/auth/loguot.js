@@ -1,8 +1,8 @@
 const { auth } = require("../../services");
 
 const logout = async (req, res) => {
-  const user = req.user;
-  const result = await auth.logout(user._id);
+  const { _id } = req.user;
+  await auth.logout(_id);
 
   res.status(200).json({ message: "success" });
 };

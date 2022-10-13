@@ -10,7 +10,7 @@ const updateById = async (contactId, body, owner) => {
     {
       $set: { ...body },
     },
-    { new: true }
+    { projection: { owner: false, createdAt: 0, updatedAt: 0 }, new: true }
   );
 
   if (!contact) {
