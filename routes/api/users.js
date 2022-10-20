@@ -6,14 +6,6 @@ const { userJoiSchema } = require("../../schemas");
 
 const router = express.Router();
 
-router.post(
-  "/verify",
-  validateBody(userJoiSchema.verifySchema),
-  hlps.ctrlWrapper(ctrl.reVerify)
-);
-
-router.get("/verify/:verificationToken", hlps.ctrlWrapper(ctrl.verify));
-
 router.get("/current", auth, hlps.ctrlWrapper(ctrl.getCurrent));
 
 router.patch(

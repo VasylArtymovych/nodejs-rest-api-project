@@ -9,7 +9,7 @@ const getAll = async (req, res) => {
 
   const contacts = await operations.getAll(owner, skip, limit, rest);
 
-  res.status(200).json({ contacts, page, limit });
+  res.status(200).json({ contacts, page, limit, total: contacts.length });
 };
 
 module.exports = getAll;

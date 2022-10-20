@@ -20,4 +20,12 @@ router.post(
 
 router.post("/logout", auth, hlps.ctrlWrapper(ctrl.logout));
 
+router.post(
+  "/verify",
+  validateBody(userJoiSchema.verifySchema),
+  hlps.ctrlWrapper(ctrl.resendVerify)
+);
+
+router.get("/verify/:verificationToken", hlps.ctrlWrapper(ctrl.verify));
+
 module.exports = router;

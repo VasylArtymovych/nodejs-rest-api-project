@@ -14,8 +14,8 @@ const verify = async (verificationToken) => {
   await sendMail({
     to: user.email,
     subject: "Ferification success!",
-    text: `Ferification success`,
-    html: `Ferification success`,
+    text: `Your registration was successfully`,
+    html: `Your registration was successfully`,
   });
 
   return true;

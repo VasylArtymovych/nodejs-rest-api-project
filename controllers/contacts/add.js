@@ -5,7 +5,7 @@ const add = async (req, res) => {
 
   await operations.add(req.body, owner);
 
-  res.status(200).json({ status: "success" });
+  res.status(201).json({ status: "success" });
 };
 
 module.exports = add;

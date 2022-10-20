@@ -8,12 +8,8 @@ const sendMail = async (data) => {
     ...data,
   };
 
-  try {
-    await sgMail.send(msg);
-    return true;
-  } catch (error) {
-    return error.message;
-  }
+  await sgMail.send(msg);
+  return true;
 };
 
-module.exports = sendMail ;
+module.exports = sendMail;
